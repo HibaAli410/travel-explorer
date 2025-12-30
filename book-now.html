@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Now</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white w-full max-w-3xl rounded-xl shadow-lg p-8">
+
+    <!-- HEADER -->
+    <h2 class="text-2xl font-bold text-gray-800">Book Your Trip</h2>
+    <p class="text-gray-500 mt-1">Complete the form to confirm booking</p>
+
+    <!-- FORM -->
+    <form id="bookingForm" class="mt-6 space-y-4">
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+        <input required type="text"
+          class="mt-1 w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input required type="email"
+          class="mt-1 w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Destination</label>
+        <input id="destination" type="text" readonly
+          class="mt-1 w-full rounded-md border-gray-300 bg-gray-100">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Travel Date</label>
+        <input type="date"
+          class="mt-1 w-full rounded-md border-gray-300">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Number of Persons</label>
+        <select
+          class="mt-1 w-full rounded-md border-gray-300">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4+</option>
+        </select>
+      </div>
+
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition font-semibold">
+        Confirm Booking
+      </button>
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="successMessage"
+      class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-md text-center font-semibold">
+      🎉 Booking Confirmed! We will contact you soon.
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // ✅ Get destination from URL
+    const params = new URLSearchParams(window.location.search);
+    const destination = params.get('destination');
+
+    if (destination) {
+      document.getElementById('destination').value = destination;
+    }
+
+    // ✅ Handle form submit
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      this.classList.add('hidden');
+      document.getElementById('successMessage').classList.remove('hidden');
+    });
+  </script>
+
+</body>
+</html>
